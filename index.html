@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación 15 años - Luciana & Martina</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin:0;
+    background: radial-gradient(circle, #e6c670 0%, #b8922e 100%);
+    background-attachment: fixed;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+    text-align:center;
+    overflow-x: hidden;
+    font-size: 16px;
+}
+
+/* --- CANVAS PARA FUEGOS ARTIFICIALES --- */
+#fireworks-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* --- LOGO PERSONALIZADO --- */
+.logo-quince {
+    width: 150px; /* Ajusta el tamaño según prefieras */
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.5)) multiply(1.1);
+    animation: pulse 3s infinite ease-in-out;
+    mix-blend-mode: multiply; /* Ayuda a que el blanco del logo se integre al fondo dorado */
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* --- TEXTOS --- */
+.semicirculo { font-family:'Great Vibes', cursive; font-size:42px; color:#333; margin-bottom: 5px; z-index: 1; position: relative; }
+.titulo-15 { font-size:28px; letter-spacing:4px; color:#333; text-transform: uppercase; z-index: 1; position: relative; }
+.nombres { font-family:'Great Vibes', cursive; font-size:75px; color:#000; margin:10px 0; z-index: 1; position: relative; }
+
+/* --- IMAGEN PRINCIPAL --- */
+.foto-principal {
+    width: 85%;
+    max-width: 450px;
+    border-radius: 20px;
+    border: 3px solid #d4af37;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+    margin: 15px auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+.contenedor {
+    max-width:800px;
+    margin:20px auto;
+    background: rgba(0, 0, 0, 0.92);
+    border: 2px solid #d4af37;
+    border-radius:25px;
+    padding:30px 20px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+}
+
+/* --- CONTADOR --- */
+.grid-contador {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.cuadrito-tiempo {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 10px;
+    border-radius: 12px;
+    min-width: 65px;
+}
+
+.numero-pequeno { font-size: 22px; font-weight: 600; color: #f1c40f; display: block; line-height: 1; }
+.etiqueta-tiempo { font-size: 10px; text-transform: uppercase; color: #ccc; }
+
+/* --- INFO FILA ÚNICA --- */
+.fila-info {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.cuadrito-chico {
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid #d4af37;
+    padding: 10px 5px;
+    border-radius: 12px;
+    flex: 1;
+    font-size: 12px;
+}
+
+.cuadrito-chico strong { display: block; color: white; margin-top: 2px; }
+
+.boton {
+    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    border:none;
+    padding:15px 25px;
+    border-radius:40px;
+    font-weight:bold;
+    color: #000;
+    text-transform: uppercase;
+    cursor:pointer;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+@media (max-width: 600px) {
+    .nombres { font-size: 50px; }
+    .semicirculo { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="fireworks-canvas"></canvas>
+
+<img src="logo2.png" alt="Nuestro 15" class="logo-quince">
+
+<div class="banner">
+  <div class="semicirculo">Te invitamos a celebrar</div>
+  <div class="titulo-15">NUESTROS 15 AÑOS</div>
+  <div class="nombres">Luciana & Martina</div>
+  
+  <img src="foto.torta.jpg" alt="Luciana y Martina" class="foto-principal">
+
+  <div style="margin: 15px 0;">
+      <audio controls loop style="filter: invert(100%); height: 35px; opacity: 0.8; position: relative; z-index: 1;">
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+      </audio>
+  </div>
+</div>
+
+<div class="contenedor">
+    <p style="font-style: italic; font-size: 1.1em; opacity: 0.9;">
+        “Hay momentos que se vuelven inolvidables cuando se comparten con las personas que más queremos”
+    </p>
+
+    <h4 style="color:#d4af37; letter-spacing: 2px; margin-bottom: 5px;">¿CUÁNTO FALTA?</h4>
+    
+    <div class="grid-contador">
+      <div class="cuadrito-tiempo"><span id="dias" class="numero-pequeno">00</span><span class="etiqueta-tiempo">Días</span></div>
+      <div class="cuadrito-tiempo"><span id="horas" class="numero-pequeno">00</span><span class="etiqueta-tiempo">Hrs</span></div>
+      <div class="cuadrito-tiempo"><span id="min" class="numero-pequeno">00</span><span class="etiqueta-tiempo">Min</span></div>
+      <div class="cuadrito-tiempo"><span id="seg" class="numero-pequeno">00</span><span class="etiqueta-tiempo">Seg</span></div>
+    </div>
+
+    <div class="fila-info">
+      <div class="cuadrito-chico">📅<strong>28 Mar 2026</strong></div>
+      <div class="cuadrito-chico">⏰<strong>21:00 hrs</strong></div>
+      <div class="cuadrito-chico">👗<strong>Semiformal</strong></div>
+    </div>
+
+    <p style="font-size: 14px;">Por favor, confirma tu asistencia antes del 10 de marzo</p>
+    <button class="boton" onclick="window.location.href='https://forms.gle/81bc6fc7QTjaicns5'">Confirmar Asistencia</button>
+
+    <div style="margin: 25px 0;">
+        <button class="boton" style="background:transparent; border: 1px solid #d4af37; color:#d4af37;" 
+           onclick="window.open('https://maps.google.com/?q=Prudencio+Murguiondo+5121')">
+            Ver en el mapa
+        </button>
+        <p style="font-size: 0.9em; margin-top: 10px; color: #d4af37;">Prudencio Murguiondo 5121. Coop. Ucoviceta.</p>
+    </div>
+    
+    <p style="font-family:'Great Vibes', cursive; font-size: 3em; color: #f1c40f; margin: 10px 0;">¡¡Te esperamos!!</p>
+
+    <div style="margin-top: 30px; border-top: 1px solid rgba(212,175,55,0.2); padding-top: 20px;">
+        <p style="font-family:'Great Vibes', cursive; font-size:30px; color:#d4af37; margin:0;">Regalos 🎁</p>
+        <p style="font-size: 0.85em;">Luciana: Prex 1683504<br>Martina: Mi Dinero 3701668510</p>
+    </div>
+
+    <div style="margin-top: 30px;">
+        <p style="font-family:'Great Vibes', cursive; font-size:30px; color:#d4af37; margin:0;">¡Sé nuestro fotógrafo! 📷</p>
+        <button class="boton" style="margin-top:10px; padding: 10px 20px;" onclick="window.open('https://photos.app.goo.gl/wN2iEgpfUNX6MhRx6')">
+            Subir fotos aquí
+        </button>
+    </div>
+</div>
+
+<script>
+// --- FUEGOS ARTIFICIALES ---
+const canvas = document.getElementById('fireworks-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+window.addEventListener('resize', resize);
+resize();
+
+class Particle {
+    constructor(x, y, color) {
+        this.x = x; this.y = y; this.color = color;
+        this.velocity = { x: (Math.random() - 0.5) * 6, y: (Math.random() - 0.5) * 6 };
+        this.alpha = 1; this.friction = 0.96;
+    }
+    draw() {
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath(); ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = this.color; ctx.fill();
+    }
+    update() {
+        this.velocity.x *= this.friction; this.velocity.y *= this.friction;
+        this.x += this.velocity.x; this.y += this.velocity.y;
+        this.alpha -= 0.012;
+    }
+}
+
+function createFirework() {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * (canvas.height * 0.6);
+    const color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+    for (let i = 0; i < 25; i++) particles.push(new Particle(x, y, color));
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p, i) => {
+        if (p.alpha > 0) { p.update(); p.draw(); } 
+        else { particles.splice(i, 1); }
+    });
+    if (Math.random() < 0.04) createFirework();
+    requestAnimationFrame(animate);
+}
+animate();
+
+// --- CONTADOR ---
+function actualizarContador() {
+    const fecha = new Date("March 27, 2026 21:00:00").getTime();
+    const ahora = new Date().getTime();
+    const dif = fecha - ahora;
+    if (dif > 0) {
+        document.getElementById("dias").innerText = String(Math.floor(dif / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById("horas").innerText = String(Math.floor((dif % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById("min").innerText = String(Math.floor((dif % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById("seg").innerText = String(Math.floor((dif % (1000 * 60)) / 1000)).padStart(2, '0');
+    }
+}
+actualizarContador();
+setInterval(actualizarContador, 1000);
+</script>
+</body>
+</html>
